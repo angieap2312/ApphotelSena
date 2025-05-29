@@ -108,4 +108,21 @@ public class ReservasService implements IReservasService {
         }
     }
 
+    //Método para eliminar una reserva por id
+    @Override
+    public ResponseEntity<ObjectResponse> eliminarReserva(Long idReserva){
+        try {
+            Optional <ReservasEntity> entidadReservas = reservasRepository.findById(idReserva);
+            if (entidadReservas.isEmpty()){
+                return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La reserva que se desea actualizar no existe!"));
+            }else {
+                reservasRepository.deleteById(entidadReservas.get().getIdReserva());
+                return ResponseEntity.ok().body(new ObjectResponse(0,"El proceso se ha realizado exitosamente!"));
+            }
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body(new ObjectResponse(-1,"Ocurrió un error al realizar el proceso: " + e.getMessage()));
+        }
+    };
+
+
 }

@@ -14,4 +14,6 @@ public interface IReservasService {
 
     ResponseEntity <ObjectResponse> crearReserva(ReservasEntity reserva, boolean isUpdating);
 
+    ResponseEntity<ObjectResponse> eliminarReserva(Long id);
+
 }

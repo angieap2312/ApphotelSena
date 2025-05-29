@@ -49,4 +49,11 @@ public class ReservasController {
 
         return iReservasService.crearReserva(reserva, true);
     }
+
+    // Endpoint para eliminar una reserva
+    @PostMapping("/delete-reservation")
+    public ResponseEntity<ObjectResponse> eliminarReserva(@RequestBody Long idReserva) {
+
+        return iReservasService.eliminarReserva(idReserva);
+    }
 }
