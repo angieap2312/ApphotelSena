@@ -8,9 +8,7 @@ import com.sena.app_hotel.Interfaces.IReservasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +23,7 @@ public class ReservasService implements IReservasService {
     @Override
     public ResponseEntity<ObjectResponse> obtenerTodasLasReservas() {
         try {
-            return ResponseEntity.ok().body(new ObjectResponse(0,"El proceso ha terminado con éxito", reservasRepository.findAllByOrderByIdReservaDesc()));
+            return ResponseEntity.ok().body(new ObjectResponse(0,"El proceso ha terminado con éxito", reservasRepository.findAllReservasCustomData()));
         }catch (Exception e){
             return ResponseEntity.internalServerError().body(new ObjectResponse(-1,"Ocurrió un error al realizar el proceso " + e.getMessage()));
         }
