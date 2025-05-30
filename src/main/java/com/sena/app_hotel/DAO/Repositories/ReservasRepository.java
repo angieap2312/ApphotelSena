@@ -1,5 +1,6 @@
 package com.sena.app_hotel.DAO.Repositories;
 import com.sena.app_hotel.DAO.Entities.ReservasEntity;
+import com.sena.app_hotel.Payload.Responses.ReservasCustomDataDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,26 @@ public interface ReservasRepository extends JpaRepository<ReservasEntity, Long> 
 
 
     List<ReservasEntity> findAllByOrderByIdReservaDesc();
+
+    @Query(value = """
+            SELECT
+            r.id_reserva,
+            r.id_habitacion, 
+            h.tipo_habitacion,
+            CONCAT(c.nombre, ' ', c.apellido) AS "cliente",
+            r.fecha_entrada,
+            r.fecha_salida,
+            r.numero_huespedes,
+            r.estado_reserva,
+            DATE(r.fecha_reserva)
+        FROM
+            reservas r
+        JOIN
+            habitaciones h ON r.id_habitacion = h.id_habitacion
+        JOIN
+            clientes c ON r.id_cliente = c.id_cliente
+        ORDER BY
+            r.id_reserva DESC
+            """, nativeQuery = true)
+    List<ReservasCustomDataDTO>findAllReservasCustomData();
 }
