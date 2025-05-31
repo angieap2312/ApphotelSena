@@ -32,7 +32,7 @@ public class ReservasEntity {
     @Column(name = "fecha_salida", nullable = false)
     private LocalDate fechaSalida;
 
-    @Column(name = "cantidad_habitaciones", nullable = false)
+    @Column(name = "cantidad_habitaciones")
     private Integer cantidadHabitaciones;
 
     @Column(name = "numero_huespedes", nullable = false)
