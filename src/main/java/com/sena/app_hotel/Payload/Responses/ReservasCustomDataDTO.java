@@ -14,6 +14,7 @@ public class ReservasCustomDataDTO {
     private Object idReserva;
     private Object idHabitacion;
     private Object tipoHabitacion;
+    private Object idCliente;
     private Object cliente;
     private Object fechaEntrada;
     private Object fechaSalida;

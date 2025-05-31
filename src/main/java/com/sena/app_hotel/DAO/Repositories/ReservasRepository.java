@@ -36,6 +36,7 @@ public interface ReservasRepository extends JpaRepository<ReservasEntity, Long> 
             r.id_reserva,
             r.id_habitacion, 
             h.tipo_habitacion,
+            c.id_cliente,
             CONCAT(c.nombre, ' ', c.apellido) AS "cliente",
             r.fecha_entrada,
             r.fecha_salida,

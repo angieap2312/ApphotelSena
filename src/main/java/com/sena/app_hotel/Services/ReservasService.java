@@ -47,6 +47,9 @@ public class ReservasService implements IReservasService {
                 Optional <ReservasEntity> entidadReservas = reservasRepository.findById(reserva.getIdReserva());
                 if (entidadReservas.isEmpty()){
                     return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La reserva que se desea actualizar no existe!"));
+                }else {
+                    reserva.setPrecioTotal(entidadReservas.get().getPrecioTotal());
+                    reserva.setNotas(entidadReservas.get().getNotas());
                 }
             }
             // 1. Validar que la habitación exista y esté disponible
@@ -109,10 +112,11 @@ public class ReservasService implements IReservasService {
     //Método para eliminar una reserva por id
     @Override
     public ResponseEntity<ObjectResponse> eliminarReserva(Long idReserva){
+        System.out.println(idReserva);
         try {
             Optional <ReservasEntity> entidadReservas = reservasRepository.findById(idReserva);
             if (entidadReservas.isEmpty()){
-                return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La reserva que se desea actualizar no existe!"));
+                return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La reserva que se desea eliminar no existe!"));
             }else {
                 reservasRepository.deleteById(entidadReservas.get().getIdReserva());
                 return ResponseEntity.ok().body(new ObjectResponse(0,"El proceso se ha realizado exitosamente!"));
