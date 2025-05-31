@@ -92,7 +92,7 @@ public class ReservasService implements IReservasService {
             // o a una lógica más compleja de inventario.
             // Pero si "cantidad_disponible" es para un tipo de habitación del cual hay varias, sí aplica.
             // Para este ejemplo, asumimos que "cantidad_disponible" se refiere a unidades de un tipo de habitación.
-            habitacion.setCantidadDisponible(habitacion.getCantidadDisponible() - reserva.getCantidadHabitaciones());
+            //habitacion.setCantidadDisponible(habitacion.getCantidadDisponible() - reserva.getCantidadHabitaciones());
             habitacionesRepository.save(habitacion); // Guardar la actualización de la habitación
 
 
