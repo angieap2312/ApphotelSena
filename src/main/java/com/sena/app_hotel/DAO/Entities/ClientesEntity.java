@@ -1,15 +1,14 @@
 package com.sena.app_hotel.DAO.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "clientes")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientesEntity {
@@ -17,7 +16,7 @@ public class ClientesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private Integer idCliente;
+    private Long idCliente;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -36,11 +35,4 @@ public class ClientesEntity {
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
-
-    @PrePersist
-    protected void onCreate() {
-        if (fechaRegistro == null) {
-            fechaRegistro = LocalDateTime.now();
-        }
-    }
 }
