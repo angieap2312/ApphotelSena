@@ -23,6 +23,7 @@ public class ReservasService implements IReservasService {
     @Override
     public ResponseEntity<ObjectResponse> obtenerTodasLasReservas() {
         try {
+            System.out.println(reservasRepository.findAllReservasCustomData().get(0).getFechaEntrada());
             return ResponseEntity.ok().body(new ObjectResponse(0,"El proceso ha terminado con éxito", reservasRepository.findAllReservasCustomData()));
         }catch (Exception e){
             return ResponseEntity.internalServerError().body(new ObjectResponse(-1,"Ocurrió un error al realizar el proceso " + e.getMessage()));
@@ -48,6 +49,7 @@ public class ReservasService implements IReservasService {
                 if (entidadReservas.isEmpty()){
                     return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La reserva que se desea actualizar no existe!"));
                 }else {
+                    System.out.println("reserva to update: " + reserva.getEstadoReserva());
                     reserva.setPrecioTotal(entidadReservas.get().getPrecioTotal());
                     reserva.setNotas(entidadReservas.get().getNotas());
                 }
@@ -77,8 +79,12 @@ public class ReservasService implements IReservasService {
                 return ResponseEntity.badRequest().body(new ObjectResponse(-1, "La habitación ya está reservada para las fechas seleccionadas."));
             }
 
-            // 3. Establecer el estado de la reserva a CONFIRMADA
-            reserva.setEstadoReserva("CONFIRMADA");
+            if(!isUpdating){
+                // 3. Establecer el estado de la reserva a CONFIRMADA
+                reserva.setEstadoReserva("CONFIRMADA");
+            }
+
+
 
             // 4. Establecer la fecha de reserva al día actual (si no se hace con @PrePersist)
             // Si la fechaReserva se debe establecer automáticamente al crear, y tu entidad tiene @PrePersist
@@ -125,6 +131,4 @@ public class ReservasService implements IReservasService {
             return ResponseEntity.internalServerError().body(new ObjectResponse(-1,"Ocurrió un error al realizar el proceso: " + e.getMessage()));
         }
     };
-
-
 }

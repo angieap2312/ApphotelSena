@@ -1,5 +1,4 @@
 package com.sena.app_hotel.DAO.Repositories;
-
 import com.sena.app_hotel.DAO.Entities.ClientesEntity;
 import com.sena.app_hotel.Payload.Responses.ClientesCustomDataDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
